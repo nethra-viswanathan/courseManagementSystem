@@ -1,0 +1,115 @@
+.container{
+    background-image: url('../../assets/images/bg.jpg');
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .signInContainer{
+        width: 40%;
+        height: 470px;
+        background-color: $secondary;
+        opacity: 0.9;
+        border-radius: 5px;
+        padding: 30px;
+        .header{
+            text-align: center;
+        }
+        .primaryText{
+            color: $primary;
+            font-size: 30px;
+        }
+        .secondaryText{
+            color: $subtle;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        .sigInForm{
+            margin-top: 10%;
+            .text-input{
+                margin: auto;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+                width: 80%;
+                .input {
+                    
+                    position: relative;
+                    
+        
+                    &__label {
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                      padding: calc($size-bezel * 0.75) calc($size-bezel * .5);
+                      margin: calc($size-bezel * 0.75 + 3px) calc($size-bezel * .5);
+                      color: $subtle;
+                      white-space: nowrap;
+                      transform: translate(0, 0);
+                      transform-origin: 0 0;
+                      background: $secondary;
+                      transition: transform 120ms ease-in;
+                      font-size: 13px;
+                      line-height: 1.2;
+                    }
+                    &__field {
+                      box-sizing: border-box;
+                      display: block;
+                      width: 100%;
+                      border: 1.5px solid $primary;
+                      padding: calc($size-bezel * 1.5) $size-bezel;
+                      color: $subtle;
+                      background: transparent;
+                      border-radius: $size-radius;
+                      
+                      &:focus,
+                      &:not(:placeholder-shown) {
+                        & + .input__label {
+                          transform: translate(.25rem, -65%) scale(.8);
+                          color: $primary;
+                          font-weight: 600;
+                        //   opacity: 0.8;
+                        }
+                      }
+                    }
+                }
+            }
+            .button-input{
+                margin: auto;
+                width: 80%;
+                input{
+                    font-family: inherit;
+                    border: 1px solid $primary;
+                    outline: none;
+                    width: 100%;
+                    padding: 15px 15px;
+                    transition: 0.5s;
+                    background-size: 200% auto;
+                    color: $secondary;
+                    font-size: 15px;
+                    background-image: linear-gradient(to right, #73cdb1 0%, #7ccebd 51%, #bce6de 100%);
+                    background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD  51%, #4CB8C4  100%);
+                    border-radius: 5px;
+                    
+                }
+                input:hover {
+                    background-position: right center; /* change the direction of the change here */
+                }
+                
+            }
+            .signUpSection{
+                text-align: center;
+                font-size: 12px;
+                color: $subtle;
+                margin-top: 10px;
+                span{
+                    text-decoration: underline;
+                    font-weight: 500;
+                    cursor: pointer;
+                    color: $subtle; 
+                }
+            } 
+        }
+        
+        
+    }
+}
