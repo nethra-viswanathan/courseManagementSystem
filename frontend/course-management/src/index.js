@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
+import HomeStudent from './components/HomeStudent/HomeStudent';
+
 import { BrowserRouter, Routes, Route, Navigate, } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,6 +16,7 @@ root.render(
           <Route path="/" element={<Navigate replace to="/SignIn" />} />
           <Route path="/SignIn" element={< SignIn />} />
           <Route path="/SignUp" element={< SignUp />} />
+          <Route path="/StudentDashboard" element={< HomeStudent />} />
         </Routes>
       </BrowserRouter>
   </React.StrictMode>

@@ -5,6 +5,10 @@ function SignIn(){
     const redirectSignUp = () =>{
         navigate("/SignUp")
     }
+    const redirectSignIn = () => {
+        navigate("/StudentDashboard")
+    }
+
     return(
         <>
             <div className="container">
@@ -13,7 +17,7 @@ function SignIn(){
                         <div className="primaryText">Welcome Back!</div>
                         <div className="secondaryText">Enter your details to sign in</div>
                     </div>
-                    <form action="" className="sigInForm">
+                    <form action="" className="sigInForm" onSubmit={redirectSignIn}>
                         <div className="text-input"> 
                             <label class="input">
                                 <input class="input__field" type="text" placeholder=" " />

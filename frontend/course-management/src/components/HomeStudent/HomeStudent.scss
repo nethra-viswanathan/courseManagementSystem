@@ -1,0 +1,62 @@
+
+.courseListingParent{
+    margin: auto;
+    border: 1px solid $primary;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    margin-top: 7%;
+    .courseItemsSection{
+        .header{
+            color: $primary;
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 5px;
+            margin-left: 10px;
+            margin-bottom: 20px;
+        }
+        .courseItems{
+            padding: 10px;
+            .checkbox-input {
+                display: none;
+                &:checked + label .checkbox {
+                  &:after {
+                    transform: translate(-50%, -50%) scale(1);
+                  }
+                }
+            }
+              
+            .checkbox {
+                border: 1px solid $primary;
+                border-radius: 3px;
+                width: 16px;
+                height: 16px;
+                display: inline-block;
+                position: relative;
+              
+                &:after {
+                  content: '';
+                  display: block;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%) scale(0);
+                  width: 12px;
+                  height: 12px;
+                  background-color: $primary;
+                  border-radius: 3px;
+                  transition: 0.3s;
+                }
+            }
+
+            .checkBoxParent{
+                margin-top: 3px;
+                margin-right: 10px;
+                
+            }
+            .css-ahj2mt-MuiTypography-root{
+                display: flex;
+            }
+        }
+    }
+}
