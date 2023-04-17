@@ -1,0 +1,18 @@
+.courseListingParent{
+    margin: auto;
+    border: 1px solid $primary;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    margin-top: 7%;
+    .courseItemsSection{
+        .header{
+            color: $primary;
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 5px;
+            margin-left: 10px;
+            margin-bottom: 20px;
+        }
+    }
+}
