@@ -1,23 +1,24 @@
 import { useNavigate } from "react-router-dom";
-
-function SignIn(){
+function SignUpIns(){
     const navigate = useNavigate();
-    const redirectSignUp = () =>{
-        navigate("/SignUp")
+    const redirectSignIn = () =>{
+        navigate("/SignIn")
     }
-    const redirectSignIn = () => {
-        navigate("/StudentDashboard")
-    }
-
     return(
         <>
             <div className="container-parent">
                 <div className="signInContainer">
                     <div className="header">
-                        <div className="primaryText">Welcome Back!</div>
-                        <div className="secondaryText">Enter your details to sign in</div>
+                        <div className="primaryText">Hey There!</div>
+                        <div className="secondaryText">Enter your details to sign up</div>
                     </div>
-                    <form action="" className="sigInForm" onSubmit={redirectSignIn}>
+                    <form action="" className="sigInForm">
+                        <div className="text-input"> 
+                            <label class="input">
+                                <input class="input__field" type="text" placeholder=" " />
+                                <span class="input__label">Name</span>
+                            </label>
+                        </div>
                         <div className="text-input"> 
                             <label class="input">
                                 <input class="input__field" type="text" placeholder=" " />
@@ -31,10 +32,10 @@ function SignIn(){
                             </label>
                         </div>
                         <div className="button-input">
-                            <input type="submit" name="" id="" className="submit-login" value="Sign In" />
+                            <input type="submit" name="" id="" className="submit-login" value="Sign Up" />
                         </div>
                         <div className="signUpSection">
-                            New Here? <span href="#" onClick={redirectSignUp}>Sign Up Here</span>
+                            Already A User? <span href="#" onClick={redirectSignIn}>Sign In Here</span>
                         </div>
                     </form>
                 </div>
@@ -43,4 +44,4 @@ function SignIn(){
     )
 }
 
-export default SignIn;
+export default SignUpIns;

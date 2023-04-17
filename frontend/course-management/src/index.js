@@ -6,7 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import HomeStudent from './components/HomeStudent/HomeStudent';
-
+import InstructorStudent from './components/InstructorStudent/InstructorStudent';
+import Assignments from './components/Assignments/Assignments';
+import SingleAssignment from './components/SingleAssignment/SingleAssignment';
+import SignInInstructor from './components/SignInInstructor/SignInInstructor';
+import SignUpIns from './components/SignUpIns/SignUpIns.jsx'
+import InstructorDashboard from './components/InstructorDashboard/InstructorDashboard';
 import { BrowserRouter, Routes, Route, Navigate, } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +21,13 @@ root.render(
           <Route path="/" element={<Navigate replace to="/SignIn" />} />
           <Route path="/SignIn" element={< SignIn />} />
           <Route path="/SignUp" element={< SignUp />} />
+          <Route path="/InstructorSignin" element={< SignInInstructor />} />
+          <Route path="/InstructorSignUp" element={< SignUpIns />} />
           <Route path="/StudentDashboard" element={< HomeStudent />} />
+          <Route path="/InstructorDashboard" element={< InstructorDashboard />} />
+          <Route path="/InstructorBasedCourses" element={< InstructorStudent />} />
+          <Route path="/AssignmentList" element={< Assignments />} />
+          <Route path="/Assignment" element={< SingleAssignment />} />
         </Routes>
       </BrowserRouter>
   </React.StrictMode>

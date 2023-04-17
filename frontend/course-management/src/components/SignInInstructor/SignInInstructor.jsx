@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
-function SignIn(){
+function SignInInstructor(){
     const navigate = useNavigate();
     const redirectSignUp = () =>{
         navigate("/SignUp")
     }
     const redirectSignIn = () => {
-        navigate("/StudentDashboard")
+        navigate("/InstructorDashboard")
     }
 
     return(
@@ -43,4 +43,4 @@ function SignIn(){
     )
 }
 
-export default SignIn;
+export default SignInInstructor;

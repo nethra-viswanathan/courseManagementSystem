@@ -4,14 +4,19 @@ function Header() {
     const redirectYourCourses = () => {
         navigate("/StudentDashboard")
     }
+
+    const redirectToInstructor = () => {
+        navigate("/InstructorBasedCourses")
+    }
+    
     return(
         <>
             <div className="menuParent">
                 <div className="logo">Chonks</div>
                 <div className="menuItems">
                     <ul>
-                        <li onClick={redirectYourCourses}><a href="#">Your Courses</a></li>
-                        <li><a href="#">Instructors</a></li>
+                        <li onClick={redirectYourCourses}><span>Your Courses</span></li>
+                        <li onClick={redirectToInstructor}><span>Instructors</span></li>
                         
                     </ul>
                     {/* <span>All Courses</span>

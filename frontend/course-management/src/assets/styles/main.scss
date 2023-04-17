@@ -1,7 +1,12 @@
+@import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Seaweed+Script&display=swap');
 @import '../styles/themes';
 @import '../styles/styles.scss';
 @import '../../components/SignIn/SignIn.scss';
 @import '../../components/HomeStudent/HomeStudent.scss';
-@import '../../components/Header/Header.scss'
+@import '../../components/Header/Header.scss';
+@import '../../components/InstructorStudent/InstructorStudent.scss';
+@import '../../components/Assignments/Assignments.scss';
+@import '../../components/SingleAssignment/SingleAssignment.scss';
+@import '../../components/InstructorDashboard/InstructorDashboard.scss';

@@ -6,7 +6,7 @@ function SignUp(){
     }
     return(
         <>
-            <div className="container">
+            <div className="container-parent">
                 <div className="signInContainer">
                     <div className="header">
                         <div className="primaryText">Hey There!</div>

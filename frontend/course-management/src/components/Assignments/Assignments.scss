@@ -1,0 +1,57 @@
+.AssignmentListingParent{
+    margin: auto;
+    border: 1px solid $primary;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    margin-top: 7%;
+    .courseItemsSection{
+        .header{
+            color: $primary;
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 5px;
+            margin-left: 10px;
+            margin-bottom: 20px;
+        }
+        .courseItems{
+            font-family: "Montserrat", sans-serif;
+            display: flex;
+            .assignmentName{
+                font-size: 18px;
+                font-weight: 500;
+                margin-bottom: 10px;
+                color: $primary-dark;
+            }
+            .css-46bh2p-MuiCardContent-root{
+                font-family: inherit;
+                padding: 10px;
+                cursor: pointer;
+                margin-right: 10px;
+            }
+            .cardParent{
+                width: 100%;
+                display: flex;
+                .card{
+                    // width: 24%;
+                    margin: 10px;
+                    border-radius: 4px; 
+                    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+                    background-color: $secondary;
+                    padding: 20px;
+                    border: none;
+                    cursor: pointer;
+                    .primaryText{
+                        font-size: 20px;
+                        color: $primary-dark;
+                        margin-bottom: 15px;
+                    }
+                    .secondaryText{
+                        font-size: 14px;
+                        color: $subtle;
+                    }
+                }
+            }
+        }
+    }
+}

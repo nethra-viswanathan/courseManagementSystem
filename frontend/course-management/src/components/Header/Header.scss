@@ -23,14 +23,15 @@
             margin: 0;
             padding: 0;
             li{
-                a{
+                span{
                     margin: 5px 20px;
                     text-decoration: none;
                     color: $primary-dark;
+                    cursor: pointer;
                 }
             }
 
-            li > a::after {
+            li > span::after {
                 content: "";
                 display: block;
                 margin: auto;
@@ -42,7 +43,7 @@
                 
             }
               
-            li > a:hover::after, li > a.active-nav::after {
+            li > span:hover::after, li > span.active-nav::after {
                 width: 85%;
                 background: $secondary;
                 position: relative;
