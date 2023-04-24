@@ -12,6 +12,8 @@ import SingleAssignment from './components/SingleAssignment/SingleAssignment';
 import SignInInstructor from './components/SignInInstructor/SignInInstructor';
 import SignUpIns from './components/SignUpIns/SignUpIns.jsx'
 import InstructorDashboard from './components/InstructorDashboard/InstructorDashboard';
+import AddCourse from './components/AddCourse/AddCourse';
+import InstructorAssignments from './components/InstructorAssignments/InstructorAssignments';
 import { BrowserRouter, Routes, Route, Navigate, } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,6 +30,8 @@ root.render(
           <Route path="/InstructorBasedCourses" element={< InstructorStudent />} />
           <Route path="/AssignmentList" element={< Assignments />} />
           <Route path="/Assignment" element={< SingleAssignment />} />
+          <Route path="/AddCourse" element={< AddCourse />} />
+          <Route path="/ViewAssignments" element={< InstructorAssignments />} />
         </Routes>
       </BrowserRouter>
   </React.StrictMode>

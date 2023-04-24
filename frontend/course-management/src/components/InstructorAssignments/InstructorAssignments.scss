@@ -1,0 +1,90 @@
+.AssignmentListingParentIns{
+    margin: auto;
+    border: 1px solid $primary;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    margin-top: 7%;
+    .courseItemsSection{
+        .header{
+            display: flex;
+            justify-content: space-between;
+            .text1{
+                color: $primary;
+                font-size: 24px;
+                font-weight: 500;
+                letter-spacing: 5px;
+                margin-left: 10px;
+                margin-bottom: 15px;
+            }
+            .text2{
+                color: $subtle;
+                font-size: 14px;
+                margin-left: 10px;
+                margin-bottom: 15px;
+            }
+            .button-input{
+                margin: auto;
+                width: 80%;
+                input{
+                    font-family: inherit;
+                    border: 1px solid $primary;
+                    outline: none;
+                    width: 100%;
+                    padding: 15px 15px;
+                    transition: 0.5s;
+                    background-size: 200% auto;
+                    color: $secondary;
+                    font-size: 15px;
+                    background-image: linear-gradient(to right, #73cdb1 0%, #7ccebd 51%, #bce6de 100%);
+                    background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD  51%, #4CB8C4  100%);
+                    border-radius: 5px;
+                    
+                }
+                input:hover {
+                    background-position: right center; /* change the direction of the change here */
+                }
+                
+            }
+        }
+        .courseItems{
+            font-family: "Montserrat", sans-serif;
+            display: flex;
+            .assignmentName{
+                font-size: 18px;
+                font-weight: 500;
+                margin-bottom: 10px;
+                color: $primary-dark;
+            }
+            .css-46bh2p-MuiCardContent-root{
+                font-family: inherit;
+                padding: 10px;
+                cursor: pointer;
+                margin-right: 10px;
+            }
+            .cardParent{
+                width: 100%;
+                display: flex;
+                .card{
+                    // width: 24%;
+                    margin: 10px;
+                    border-radius: 4px; 
+                    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+                    background-color: $secondary;
+                    padding: 20px;
+                    border: none;
+                    cursor: pointer;
+                    .primaryText{
+                        font-size: 20px;
+                        color: $primary-dark;
+                        margin-bottom: 15px;
+                    }
+                    .secondaryText{
+                        font-size: 14px;
+                        color: $subtle;
+                    }
+                }
+            }
+        }
+    }
+}
