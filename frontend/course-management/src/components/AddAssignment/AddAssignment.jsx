@@ -14,8 +14,9 @@ function AddAssignments(){
     const handleClick = (evt) => {
         if(name != "" && desc != ""){
             evt.preventDefault()
+              const userId = localStorage.getItem('userId');
         
-            fetch(`http://localhost:8080/teachers/courses/createAssignments/${id}`,{
+            fetch(`http://localhost:8080/teachers/courses/createAssignments/${id}/${userId}`,{
             method: 'POST',
 
             headers: {

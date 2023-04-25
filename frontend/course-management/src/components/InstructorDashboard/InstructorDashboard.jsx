@@ -25,7 +25,8 @@ function InstructorDashboard(){
         // navigate("/ViewAssignments/"id)
     }
     useEffect(() => {
-        fetch(`http://localhost:8080/teachers/courses`,{
+        const userId = localStorage.getItem('userId');
+        fetch(`http://localhost:8080/teachers/courses/${userId}`,{
         method: 'GET',
 
         })

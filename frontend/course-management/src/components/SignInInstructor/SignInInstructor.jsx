@@ -13,39 +13,42 @@ function SignInInstructor(){
     const redirectSignIn = () => {
         navigate("/InstructorDashboard")
     }
-    const handleClick = (evt) => {
-        evt.preventDefault()
-        
-        fetch(`http://localhost:8080/auth/login/teacher`,{
-        method: 'POST',
+   const handleClick = (evt) => {
+    evt.preventDefault();
 
+    fetch(`http://localhost:8080/auth/login/teacher`, {
+        method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json ',
         },
-        
         body: JSON.stringify({
             "email": name,
-            "password": password 
+            "password": password
         }),
-        })
+    })
         .then(response => {
-            if(response.status == 200){
-                // setTimeout(() => {
-                    navigate("/InstructorDashboard")
-                // }, 2000);
-            }else{
-                console.log('error'); 
-                setShowMsg("Unable to login. Please try again")
+            if (response.status === 200) {
+                return response.json(); // Parse the response body as JSON
+            } else {
+                console.log('error');
+                setShowMsg("Unable to login. Please try again");
+                throw new Error('Login failed'); // Throw an error to trigger the catch block
             }
         })
         .then(data => {
-            
+            // Access userId and userType from the parsed JSON object
+            const { userId, userType } = data;
+            // Save userId and userType to local storage
+            localStorage.setItem('userId', userId);
+            localStorage.setItem('userType', userType);
+            // Navigate to InstructorDashboard
+            navigate("/InstructorDashboard");
         })
         .catch((err) => {
-            
+            console.error(err);
         });
-    };
+};
 
     return(
         <>

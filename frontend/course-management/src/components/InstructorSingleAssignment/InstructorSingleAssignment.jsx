@@ -6,22 +6,29 @@ function InstructorSingleAssignment(){
     const {cId , aId, sId} = useParams()
     const [data,setData] = useState([]);
     const [msg,setMsg] = useState([]);
-    useEffect(() => {
-        console.log("here")
-        fetch(`http://localhost:8080/teachers/courses/${cId}/assignments/${aId}/submissions/${sId}`,{
-        method: 'GET',
-
-        })
-        .then(response => response.json())
-        .then(data => {
-            setData(data)
-            console.log(data)
+   useEffect(async () => {
+    const userId = localStorage.getItem('userId');
+    console.log("here");
+    try {
+        const response = await fetch(`http://localhost:8080/teachers/courses/${cId}/assignments/${aId}/submissions/${sId}/${userId}`,{
+            method: 'GET',
         });
-    },[])
-    const handleClick = (evt) => {
+        if (response.ok) {
+            const data = await response.json();
+            setData(data);
+            console.log(data);
+        } else {
+            console.log('Error:', response.status);
+        }
+    } catch (error) {
+        console.log('Error:', error);
+    }
+}, []);
+    const handleClick = async(evt) => {
+          const userId = localStorage.getItem('userId');
         evt.preventDefault()
         
-        fetch(`http://localhost:8080/students/courses/${cId}/assignments/${aId}/submissions/${sId}/comments`,{
+        await fetch(`http://localhost:8080/teachers/assignments/${aId}/submissions/${sId}/comments/${userId}`,{
         method: 'POST',
 
         headers: {
@@ -104,7 +111,7 @@ function InstructorSingleAssignment(){
                         <div className="text2">Use this section to address any concerns you might have with your submission</div>
                     </div>
                     <div className="body">
-                    { data.comment.map((comments) => 
+                    {data.comment && data.comment.map((comments) => 
                         <div className={`commentEl ${comments.usertype == "Student" ? "elRight": "elLeft"}`}>
                             <div className="userName">{comments.usertype}</div>
                             <div className="commentBubble">

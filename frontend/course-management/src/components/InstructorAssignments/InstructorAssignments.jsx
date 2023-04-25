@@ -17,7 +17,9 @@ function InstructorAssignments(){
     //     nav(`/ViewStudentsInAssignment/${id}/${aId}`)
     // }
     useEffect(() => {
-        fetch(`http://localhost:8080/teachers/courses/courseAssignments/${id}`,{
+        const userId = localStorage.getItem('userId');
+
+        fetch(`http://localhost:8080/teachers/courses/courseAssignments/${id}/${userId}`,{
         method: 'GET',
 
         })

@@ -5,7 +5,8 @@ function ViewStudentsInCourse(){
     const {cId , aId} = useParams()
     const [students,setStudents] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:8080/teachers/courses/${cId}/assignments/${aId}/submissions`,{
+          const userId = localStorage.getItem('userId');
+        fetch(`http://localhost:8080/teachers/courses/${cId}/assignments/${aId}/submissions/${userId}`,{
         method: 'GET',
 
         })
