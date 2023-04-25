@@ -6,8 +6,8 @@ function AddCourse(){
     const [name,setName] = useState("");
     const handleClick = (evt) => {
         evt.preventDefault()
-        
-        fetch(`http://localhost:8080/teachers/courses`,{
+        const userId = localStorage.getItem('userId');
+        fetch(`http://localhost:8080/teachers/courses/${userId}`,{
         method: 'POST',
 
         headers: {

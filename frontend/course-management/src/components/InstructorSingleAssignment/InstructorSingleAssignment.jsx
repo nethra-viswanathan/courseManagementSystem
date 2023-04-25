@@ -1,7 +1,11 @@
 import InstructorHeader from '../InstructorHeader/InstructorHeader';
 import React, { useState,useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 function InstructorSingleAssignment(){
     const {cId , aId, sId} = useParams()
     const [data,setData] = useState([]);
@@ -56,6 +60,39 @@ function InstructorSingleAssignment(){
         });
     };
 
+    const changeStatus = async(evt) => {
+        const userId = localStorage.getItem('userId');
+        console.log("test",evt.target.value)
+      evt.preventDefault()
+      
+      await fetch(`http://localhost:8080/teachers/courses/${cId}/assignments/${aId}/submissions/${sId}/${userId}`,{
+      method: 'PUT',
+
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json ',
+      },
+      
+      body: JSON.stringify({
+          "status": evt.target.value,
+      }),
+      })
+      .then(response => {
+          if(response.status == 200){
+              // setTimeout(() => {
+                  // navigate("/StudentDashboard")
+              // }, 5000);
+          }else{
+              console.log('error'); 
+          }
+      })
+      .then(data => {
+      })
+      .catch((err) => {
+          
+      });
+  };
+
     return(
         <>
             <InstructorHeader></InstructorHeader>
@@ -82,7 +119,20 @@ function InstructorSingleAssignment(){
                                 </tr> */}
                                 <tr>
                                     <td className="tableQ">Status</td>
-                                    <td className="tableA"><div className={`StatusBadge ${data.status == "Not Started" || data.stus == "Incomplete" ? "error" : ""} ${data.status == "Submitted" ? "warning" : ""} ${data.status == "Completed" ? "success" : ""}`}></div>{data.status}</td>
+                                    <td className="tableA">
+                                    <FormControl>
+                                    <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
+                                    <RadioGroup
+                                        aria-labelledby="demo-radio-buttons-group-label"
+                                        defaultValue="female"
+                                        name="radio-buttons-group"
+                                    >
+                                        <FormControlLabel value="Incomplete" control={<Radio />} label="Incomplete" onChange={changeStatus}/>
+                                        <FormControlLabel value="Completed" control={<Radio />} label="Completed" onChange={changeStatus}/>
+                                    </RadioGroup>
+                                    </FormControl>
+                                        {/* <div className={`StatusBadge ${data.status == "Not Started" || data.stus == "Incomplete" ? "error" : ""} ${data.status == "Submitted" ? "warning" : ""} ${data.status == "Completed" ? "success" : ""}`}></div>{data.status} */}
+                                    </td>
                                 </tr>
                             </table>
                         </div>
