@@ -16,7 +16,7 @@ function SingleAssignment(){
         const userId = localStorage.getItem('userId');
         console.log("here");
         try {
-            const response = await fetch(`http://localhost:8080/teachers/courses/${cId}/assignments/${aId}/submissions/${sId}/${userId}`,{
+            const response = await fetch(`http://localhost:8080/students/courses/${cId}/assignments/${aId}/submissions/${sId}/${userId}`,{
                 method: 'GET',
             });
             if (response.ok) {
@@ -34,7 +34,7 @@ function SingleAssignment(){
               const userId = localStorage.getItem('userId');
             evt.preventDefault()
             
-            await fetch(`http://localhost:8080/teachers/assignments/${aId}/submissions/${sId}/comments/${userId}`,{
+            await fetch(`http://localhost:8080/students/courses/${cId}/assignments/${aId}/submissions/${sId}/comments/${userId}`,{
             method: 'POST',
     
             headers: {
@@ -66,7 +66,7 @@ function SingleAssignment(){
           evt.preventDefault()
           
           await fetch(`http://localhost:8080/students/courses/${cId}/assignments/${aId}/submissions/${sId}/${userId}`,{
-          method: 'POST',
+          method: 'PUT',
   
           headers: {
               'Accept': 'application/json',

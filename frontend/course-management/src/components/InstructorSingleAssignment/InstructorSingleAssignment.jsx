@@ -32,8 +32,8 @@ function InstructorSingleAssignment(){
           const userId = localStorage.getItem('userId');
         evt.preventDefault()
         
-        await fetch(`http://localhost:8080/students/courses/${cId}/assignments/${aId}/submissions/${sId}/comments/${userId}`,{
-        method: 'POST',
+        await fetch(`http://localhost:8080/teachers/assignments/${aId}/submissions/${sId}/comments/${userId}`,{
+           method: 'POST',
 
         headers: {
             'Accept': 'application/json',

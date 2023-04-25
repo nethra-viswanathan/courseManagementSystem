@@ -31,7 +31,7 @@ function InstructorStudent(){
             <div className="InstructorListingParent">
                 <div className="courseItemsSection">
                     <div className="header">
-                        Your Courses
+                        Instructors
                     </div>
                     <div className="courseItems">
                     { ins.map((course) =>  
