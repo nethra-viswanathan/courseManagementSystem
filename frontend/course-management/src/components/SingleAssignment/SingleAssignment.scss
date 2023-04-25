@@ -220,9 +220,18 @@
                         height: 15px;
                         width: 15px;
                         border-radius: 10px;
-                        background-color: $error;
+                        // background-color: $error;
                         margin-top: 2px;
                         margin-right: 7px;
+                    }
+                    .StatusBadge.error{
+                        background-color: $error;
+                    }
+                    .StatusBadge.success{
+                        background-color: $success;
+                    }
+                    .StatusBadge.warning{
+                        background-color: $warning;
                     }
                 }
             }

@@ -1,44 +1,49 @@
 import InstructorHeader from "../InstructorHeader/InstructorHeader"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from 'react';
 function AddAssignments(){
     const nav = useNavigate()
-    const [password,setPassword] = useState("")
+    const [desc,setDesc] = useState("")
     const [name, setName] = useState("");
+    const { id } = useParams();
+    console.log("id",id)
     const redirectAllCourses = (e) =>{
         e.preventDefault()
         nav('/ViewAssignments')
     }
     const handleClick = (evt) => {
-        evt.preventDefault()
+        if(name != "" && desc != ""){
+            evt.preventDefault()
         
-        fetch(`http://localhost:8080/auth/login/student`,{
-        method: 'POST',
+            fetch(`http://localhost:8080/teachers/courses/createAssignments/${id}`,{
+            method: 'POST',
 
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json ',
-        },
-        
-        body: JSON.stringify({
-            "name": name,
-            "description": password 
-        }),
-        })
-        .then(response => {
-            if(response.status == 200){
-                    // navigate("/StudentDashboard")
-            }else{
-                console.log('error'); 
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json ',
+            },
+            
+            body: JSON.stringify({
+                "name": name,
+                "description": desc 
+            }),
+            })
+            .then(response => {
+                if(response.status == 200 || response.status == 201){
+                        nav(`/ViewAssignments/${id}`)
+                }else{
+                    console.log('error'); 
+                    
+                }
+            })
+            .then(data => {
                 
-            }
-        })
-        .then(data => {
-            
-        })
-        .catch((err) => {
-            
-        });
+            })
+            .catch((err) => {
+                
+            });
+        }   
+        
     };
     return(
         <>
@@ -53,13 +58,13 @@ function AddAssignments(){
                         <form action="" className="createCourseForm" onSubmit={handleClick}>
                             <div className="text-input"> 
                                 <label class="input">
-                                    <input class="input__field" type="text" placeholder=" " />
+                                    <input class="input__field" type="text" placeholder=" "  onChange={(e) => setName(e.target.value)}/>
                                     <span class="input__label">Assingnment Title</span>
                                 </label>
                             </div>
                             <div className="text-input"> 
                                 <label class="input">
-                                    <input class="input__field" type="text" placeholder=" " />
+                                    <input class="input__field" type="text" placeholder=" "  onChange={(e) => setDesc(e.target.value)}/>
                                     <span class="input__label">Assignment Description</span>
                                 </label>
                             </div>

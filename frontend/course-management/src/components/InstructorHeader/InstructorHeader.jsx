@@ -8,6 +8,36 @@ function InstructorHeader() {
     const redirectToInstructor = () => {
         navigate("/AddCourse")
     }
+
+    const handleClick = (evt) => {
+        evt.preventDefault()
+        
+        fetch(`http://localhost:8080/auth/logout`,{
+        method: 'POST',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json ',
+        },
+        
+        body: JSON.stringify({
+            
+        }),
+        })
+        .then(response => {
+            if(response.status == 200){
+                    navigate("/InstructorSignin")
+            }else{
+                console.log('error'); 
+                // setShowMsg("Unable to login. Please try again")
+            }
+        })
+        .then(data => {
+        })
+        .catch((err) => {
+            
+        });
+    };
     
     return(
         <>
@@ -22,8 +52,8 @@ function InstructorHeader() {
                     {/* <span>All Courses</span>
                     <span>Your Courses</span> */}
                 </div>
-                <div className="signOut">
-                    <span class="material-symbols-outlined">logout</span>
+                <div className="signOut" onClick={handleClick}>
+                    <span class="material-symbols-outlined" >logout</span>
                 </div>
             </div>
         </>

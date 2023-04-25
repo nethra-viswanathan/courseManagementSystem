@@ -1,19 +1,17 @@
 import Header from "../Header/Header";
-import { useRef,useEffect } from "react";
+import { useRef,useEffect, useState } from "react";
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Masonry from '@mui/lab/Masonry';
+import { Link } from "react-router-dom";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Typography,
 } from '@mui/material';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 function HomeStudent(){
     const defaultOnErrorFn = useRef(window.onerror);
-
+    const [course,setCourse] = useState([]);
     useEffect(() => {
     window.onerror = (...args) => {
         if (args[0] === 'ResizeObserver loop limit exceeded') {
@@ -31,6 +29,17 @@ function HomeStudent(){
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         color: theme.palette.text.secondary,
     }));
+    useEffect(() => {
+        fetch(`http://localhost:8080/students/courses`,{
+        method: 'GET',
+
+        })
+        .then(response => response.json())
+        .then(data => {
+            setCourse(data)
+            console.log(data)
+        });
+    },[])
     return(
         <>
             <Header></Header>
@@ -40,27 +49,24 @@ function HomeStudent(){
                         Your Courses
                     </div>
                     <div className="courseItems">
-                        
-                        <Masonry columns={3} spacing={2}>
-                            {heights.map((height, index) => (
-                                <Paper key={index}>
-                                    <StyledAccordion sx={{ minHeight: height }}>
-                                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                        <Typography>
-                                            <div className="checkBoxParent">
-                                                <input type="checkbox" class="checkbox-input" id="checkbox" />
-                                                <label for="checkbox">
-                                                    <span class="checkbox">
-                                                    </span>
-                                                </label>
-                                            </div>
-                                            <span className="courseName">Advanced Cloud Computing</span></Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>Contents</AccordionDetails>
-                                    </StyledAccordion>
-                                </Paper>
-                            ))}
-                        </Masonry>
+                    { course.map((course) =>  
+                       
+                        <Accordion>
+                            <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                            >
+                                <Typography>{course.course}</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography>
+                                    This course involves deep learning in {course.course}
+                                    <Link to={`/ViewAssignments/${course?.id}`}><span>View Here</span></Link>
+                                </Typography>
+                            </AccordionDetails>
+                         </Accordion>
+                        )}
                     </div>
 
                 </div>

@@ -1,5 +1,20 @@
+import { useParams,Link } from "react-router-dom";
+import { useEffect,useState } from "react";
 import InstructorHeader from "../InstructorHeader/InstructorHeader"
 function ViewStudentsInCourse(){
+    const {cId , aId} = useParams()
+    const [students,setStudents] = useState([]);
+    useEffect(() => {
+        fetch(`http://localhost:8080/teachers/courses/${cId}/assignments/${aId}/submissions`,{
+        method: 'GET',
+
+        })
+        .then(response => response.json())
+        .then(data => {
+            setStudents(data)
+            console.log(data)
+        });
+    },[])
     return(
         <>
             <InstructorHeader></InstructorHeader>
@@ -13,17 +28,12 @@ function ViewStudentsInCourse(){
                         <div className="assignmentDetsTable">
                                 <table>
                                    <tbody>
+                                   { students.map((stud) => 
                                     <tr>
-                                        <td className="tableQ">Nethra Viswanathan</td>
-                                        <td className="tableA"><div className="StatusBadge success"></div> Submitted</td>
+                                        <td className="tableQ"><Link  style={{ textDecoration: 'none', color: 'inherit' }} to={`/ViewSubmission/${cId}/${aId}/${stud.id}`}>{stud.email}</Link></td>
+                                        <td className="tableA"><div className={`StatusBadge ${stud.status == "Not Started" || stud.stus == "Incomplete" ? "error" : ""} ${stud.status == "Submitted" ? "warning" : ""} ${stud.status == "Completed" ? "success" : ""}`}></div> {stud.status}</td>
                                     </tr>
-                                    <tr>
-                                        <td className="tableQ">Nethra Viswanathan</td>
-                                        <td className="tableA"><div className="StatusBadge success"></div> Submitted</td>
-                                    </tr><tr>
-                                        <td className="tableQ">Nethra Viswanathan</td>
-                                        <td className="tableA"><div className="StatusBadge success"></div> Submitted</td>
-                                    </tr>
+                                   )}
                                    </tbody>
                                 </table>
                         </div>

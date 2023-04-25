@@ -1,8 +1,54 @@
 import InstructorHeader from '../InstructorHeader/InstructorHeader';
-import React, { useState } from 'react'
-import useWindowSize from 'react-use/lib/useWindowSize'
-import { useNavigate } from "react-router-dom";
+import React, { useState,useEffect } from 'react'
+import { useParams } from 'react-router-dom';
+
 function InstructorSingleAssignment(){
+    const {cId , aId, sId} = useParams()
+    const [data,setData] = useState([]);
+    const [msg,setMsg] = useState([]);
+    useEffect(() => {
+        console.log("here")
+        fetch(`http://localhost:8080/teachers/courses/${cId}/assignments/${aId}/submissions/${sId}`,{
+        method: 'GET',
+
+        })
+        .then(response => response.json())
+        .then(data => {
+            setData(data)
+            console.log(data)
+        });
+    },[])
+    const handleClick = (evt) => {
+        evt.preventDefault()
+        
+        fetch(`http://localhost:8080/students/courses/${cId}/assignments/${aId}/submissions/${sId}/comments`,{
+        method: 'POST',
+
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json ',
+        },
+        
+        body: JSON.stringify({
+            "message": msg,
+        }),
+        })
+        .then(response => {
+            if(response.status == 200){
+                // setTimeout(() => {
+                    // navigate("/StudentDashboard")
+                // }, 5000);
+            }else{
+                console.log('error'); 
+            }
+        })
+        .then(data => {
+        })
+        .catch((err) => {
+            
+        });
+    };
+
     return(
         <>
             <InstructorHeader></InstructorHeader>
@@ -16,20 +62,20 @@ function InstructorSingleAssignment(){
                         <div className="assignmentDetsTable">
                             <table>
                                 <tr>
-                                    <td className="tableQ">Sudent Name</td>
-                                    <td className="tableA">Nethra Visw</td>
+                                    <td className="tableQ">Submission ID</td>
+                                    <td className="tableA">{data.id}</td>
                                 </tr>
-                                <tr>
+                                {/* <tr>
                                     <td className="tableQ">Assignment Title</td>
                                     <td className="tableA">Assignment 1</td>
-                                </tr>
-                                <tr>
+                                </tr> */}
+                                {/* <tr>
                                     <td className="tableQ">Assignment Description</td>
                                     <td className="tableA">Create a responsive web page using Angular and SpringBoot</td>
-                                </tr>
+                                </tr> */}
                                 <tr>
                                     <td className="tableQ">Status</td>
-                                    <td className="tableA"><div className="StatusBadge"></div> Not Started</td>
+                                    <td className="tableA"><div className={`StatusBadge ${data.status == "Not Started" || data.stus == "Incomplete" ? "error" : ""} ${data.status == "Submitted" ? "warning" : ""} ${data.status == "Completed" ? "success" : ""}`}></div>{data.status}</td>
                                 </tr>
                             </table>
                         </div>
@@ -46,7 +92,7 @@ function InstructorSingleAssignment(){
                                     
                                 </tr>
                                 <tr>
-                                    <td className="tableA">Google</td>
+                                    <td className="tableA">{data.link}</td>
                                 </tr>
                             </table>
                         </div>
@@ -58,47 +104,22 @@ function InstructorSingleAssignment(){
                         <div className="text2">Use this section to address any concerns you might have with your submission</div>
                     </div>
                     <div className="body">
-                        <div className="commentEl elRight">
-                            <div className="userName">Chonks</div>
+                    { data.comment.map((comments) => 
+                        <div className={`commentEl ${comments.usertype == "Student" ? "elRight": "elLeft"}`}>
+                            <div className="userName">{comments.usertype}</div>
                             <div className="commentBubble">
                                 <div className="currUser">
-                                     <div>Rando Comment</div>
+                                     <div>{comments.message}</div>
                                                 
                                 </div>
-                                <div className="time">Apr 15 9:15PM</div>
                             </div>
                         </div> 
-                                    
-                        <div className="commentEl elLeft">
-                            <div className="userName">user who</div>
-                            <div className="commentBubble">
-                                chonks commeny
-                                <div className="time">Apr 16 04:30AM</div>
-                            </div>
-                        </div>
+                    )} 
 
-                        <div className="commentEl elRight">
-                            <div className="userName">Chonks</div>
-                            <div className="commentBubble">
-                                <div className="currUser">
-                                     <div>Rando Comment</div>
-                                                
-                                </div>
-                                <div className="time">Apr 15 9:15PM</div>
-                            </div>
-                        </div> 
-                                    
-                        <div className="commentEl elLeft">
-                            <div className="userName">user who</div>
-                            <div className="commentBubble">
-                                chonks commeny
-                                <div className="time">Apr 16 04:30AM</div>
-                            </div>
-                        </div>
                     </div>
                     <div className="addCommentSection">
-                        <form action="">
-                            <input type="text" name="comment" id=" " placeholder="Enter your comments" />
+                        <form action=""  onSubmit={handleClick}>
+                            <input type="text" name="comment" id=" " placeholder="Enter your comments"  onChange={(e) => setMsg(e.target.value)}/>
                                     {/* send comment button */}
                                 <button type="submit" className="submitComment" >
                                     <span class="material-symbols-outlined">send</span>

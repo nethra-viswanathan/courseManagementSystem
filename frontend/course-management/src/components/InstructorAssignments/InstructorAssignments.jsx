@@ -7,15 +7,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
-import { useNavigate,useParams } from "react-router-dom";
+import { Link, useNavigate,useParams } from "react-router-dom";
 function InstructorAssignments(){
     const nav = useNavigate()
     const { id } = useParams();
     console.log("param",id)
     const [assignmentList,setAssignmentList] = useState([]);
-    const redirectToSubmittedStudents = () => { 
-        nav('/ViewStudentsInAssignment')
-    }
+    // const redirectToSubmittedStudents = (aId) => { 
+    //     nav(`/ViewStudentsInAssignment/${id}/${aId}`)
+    // }
     useEffect(() => {
         fetch(`http://localhost:8080/teachers/courses/courseAssignments/${id}`,{
         method: 'GET',
@@ -27,9 +27,9 @@ function InstructorAssignments(){
             console.log(data)
         });
     },[])
-    const redirectToAddAss = () => { 
-        nav('/AddAssignments')
-    }
+    // const redirectToAddAss = () => { 
+    //     nav(`/AddAssignments')
+    // }
 
 
     const bull = (
@@ -52,7 +52,7 @@ function InstructorAssignments(){
                         </div>
                         <div className="right">
                             <div className="button-input">
-                                <input type="button" name="" id="" className="submit-login" value="Add Assignment" onClick={redirectToAddAss} />
+                                <Link style={{ textDecoration: 'none', color: 'white' }} to={`/AddAssignments/${id}`}><input type="button" name="" id="" className="submit-login" value="Add Assignment" /></Link>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@ function InstructorAssignments(){
                                 {   assignmentList.map((assignmentList) => 
                                         <Col md={3}>
                                         <div className="cardParent">
-                                            <div className="card" onClick={redirectToSubmittedStudents}>
+                                            <Link style={{ textDecoration: 'none', color: 'white' }} to={`/ViewStudentsInAssignment/${id}/${assignmentList.id}`}><div className="card" >
                                                 <div className="primaryText">
                                                     {assignmentList.name}
                                                 </div>
@@ -70,6 +70,7 @@ function InstructorAssignments(){
                                                     {assignmentList.description}
                                                 </div>
                                             </div>
+                                            </Link>
                                         </div>
                                         </Col>
                                 )}

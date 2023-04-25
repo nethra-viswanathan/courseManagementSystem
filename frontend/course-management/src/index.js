@@ -35,9 +35,9 @@ root.render(
           <Route path="/Assignment" element={< SingleAssignment />} />
           <Route path="/AddCourse" element={< AddCourse />} />
           <Route path="/ViewAssignments/:id" element={< InstructorAssignments />} />
-          <Route path="/AddAssignments" element={< AddAssignments />} />
-          <Route path="/ViewStudentsInAssignment" element={< ViewStudentsInCourse />} />
-          <Route path="/ViewSubmission" element={< InstructorSingleAssignment />} />
+          <Route path="/AddAssignments/:id" element={< AddAssignments />} />
+          <Route path="/ViewStudentsInAssignment/:cId/:aId" element={< ViewStudentsInCourse />} />
+          <Route path="/ViewSubmission/:cId/:aId/:sId" element={< InstructorSingleAssignment />} />
         </Routes>
       </BrowserRouter>
   // </React.StrictMode>

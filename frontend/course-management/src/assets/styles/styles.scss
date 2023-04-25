@@ -7,3 +7,6 @@ textarea:focus, input:focus{
 *, *::before, *::after{
     box-sizing: revert;
 }
+Link{
+    text-decoration: none;
+}
