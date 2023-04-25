@@ -24,9 +24,11 @@ function SignIn(){
         }),
         })
         .then(response => {
-            if(response.status == 200){
+            if(response.status === 200){
+                return response.json();
                 // setTimeout(() => {
-                    navigate("/StudentDashboard")
+                  
+                    
                 // }, 5000);
             }else{
                 console.log('error'); 
@@ -34,6 +36,11 @@ function SignIn(){
             }
         })
         .then(data => {
+
+            const { userId, userType } = data;
+            localStorage.setItem('userId', userId);
+            localStorage.setItem('userType', userType);
+            navigate("/StudentDashboard")
             // console.log("data",data)
             // setTimeout(() => {
             //     navigate("/SignIn")
@@ -71,7 +78,7 @@ function SignIn(){
                         </div>
                         <div className="text-input"> 
                             <label class="input">
-                                <input class="input__field" type="text" placeholder=" " onChange={(e) => setPassword(e.target.value)}/>
+                                <input class="input__field" type="password" placeholder=" " onChange={(e) => setPassword(e.target.value)}/>
                                 <span class="input__label">Password</span>
                             </label>
                         </div>

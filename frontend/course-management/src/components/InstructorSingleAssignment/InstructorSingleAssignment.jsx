@@ -32,7 +32,7 @@ function InstructorSingleAssignment(){
           const userId = localStorage.getItem('userId');
         evt.preventDefault()
         
-        await fetch(`http://localhost:8080/teachers/assignments/${aId}/submissions/${sId}/comments/${userId}`,{
+        await fetch(`http://localhost:8080/students/courses/${cId}/assignments/${aId}/submissions/${sId}/comments/${userId}`,{
         method: 'POST',
 
         headers: {
@@ -162,7 +162,7 @@ function InstructorSingleAssignment(){
                     </div>
                     <div className="body">
                     {data.comment && data.comment.map((comments) => 
-                        <div className={`commentEl ${comments.usertype == "Student" ? "elRight": "elLeft"}`}>
+                        <div className={`commentEl ${comments.usertype == "Student" ? "elLeft": "elRight"}`}>
                             <div className="userName">{comments.usertype}</div>
                             <div className="commentBubble">
                                 <div className="currUser">

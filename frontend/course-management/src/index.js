@@ -31,8 +31,8 @@ root.render(
           <Route path="/StudentDashboard" element={< HomeStudent />} />
           <Route path="/InstructorDashboard" element={< InstructorDashboard />} />
           <Route path="/InstructorBasedCourses" element={< InstructorStudent />} />
-          <Route path="/AssignmentList" element={< Assignments />} />
-          <Route path="/Assignment" element={< SingleAssignment />} />
+          <Route path="/AssignmentList/:cId" element={< Assignments />} />
+          <Route path="/Assignment/:cId/:aId/:sId" element={< SingleAssignment />} />
           <Route path="/AddCourse" element={< AddCourse />} />
           <Route path="/ViewAssignments/:id" element={< InstructorAssignments />} />
           <Route path="/AddAssignments/:id" element={< AddAssignments />} />

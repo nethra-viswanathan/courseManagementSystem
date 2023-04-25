@@ -33,12 +33,13 @@
                 width: 100%;
                 display: flex;
                 .card{
-                    // width: 24%;
+                    // width: 100%;
                     margin: 10px;
                     border-radius: 4px; 
                     box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
                     background-color: $secondary;
                     padding: 20px;
+                    min-height: 137px;
                     border: none;
                     cursor: pointer;
                     .primaryText{
@@ -53,5 +54,26 @@
                 }
             }
         }
+        .test{
+            display: flex;
+            .StatusBadge{
+                height: 15px;
+                width: 15px;
+                border-radius: 10px;
+                // background-color: $error;
+                margin-top: 2px;
+                margin-right: 7px;
+            }
+            .StatusBadge.error{
+                background-color: $error;
+            }
+            .StatusBadge.success{
+                background-color: $success;
+            }
+            .StatusBadge.warning{
+                background-color: $warning;
+            }
+        }
+        
     }
 }

@@ -1,10 +1,10 @@
-import { useRef,useEffect } from "react"; 
+import { useRef,useEffect,useState } from "react"; 
 import Header from "../Header/Header"
 // import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 // import Masonry from '@mui/lab/Masonry';
-
+import { useParams } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -16,29 +16,28 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 function Assignments(){
     const nav = useNavigate()
+    const [ass,setAss] = useState([]);
+    const { cId } = useParams();
+    console.log("c",cId)
+    const userId = localStorage.getItem('userId');
     const redirectToAssignmentInfo = () => { 
         nav('/Assignment')
     }
-    const defaultOnErrorFn = useRef(window.onerror);
-    console.log("firstu",defaultOnErrorFn)
     useEffect(() => {
-    window.onerror = (...args) => {
-        if (args[0] === 'ResizeObserver loop limit exceeded') {
-            console.log("varutha")
-            return true;
-        } else {
-            defaultOnErrorFn.current && defaultOnErrorFn.current(...args);
-        }
-    };
-    return () => {
-        window.onerror = defaultOnErrorFn.current;
-        console.log("enanga",defaultOnErrorFn.current)
-    };
-    }, []);
+        fetch(`http://localhost:8080/students/courses/${cId}/assignments/${userId}`,{
+        method: 'GET',
+
+        })
+        .then(response => response.json())
+        .then(data => {
+            setAss(data)
+            console.log(data)
+        });
+    },[])
     const heights = [150, 170, 190, 170, 110, 150, 130, 180, 150, 190, 100, 150, 100, 150, 160];
 
     const Item = styled(Paper)(({ theme }) => ({
@@ -109,66 +108,27 @@ function Assignments(){
                         </Card> */}
                         <Container>
                             <Row>
+                            { ass.map((assigment) =>  
                                 <Col md={3}>
                                 <div className="cardParent">
-                                    <div className="card" onClick={redirectToAssignmentInfo}>
+                                    <Link style={{ textDecoration: 'none', color: 'white' }} to={`/Assignment/${cId}/${assigment.assignmentId}/${assigment.id}`}>
+                                    <div className="card" >
                                         <div className="primaryText">
-                                            Assignment 1
+                                            {assigment.name}
                                         </div>
                                         <div className="secondaryText">
-                                            Create a responsive web page using Angular and SpringBoot.
+                                            <div className="test">
+                                            <div className={`StatusBadge ${assigment.status == "Not Started" || assigment.status == "Incomplete" ? "error" : ""} ${assigment.status == "Submitted" ? "warning" : ""} ${assigment  .status == "Completed" ? "success" : ""}`}></div>
+                                            <span>{assigment.status}</span>
+                                            </div>
+                                            
+                                            <div>Work on github and upload the link.</div>
                                         </div>
                                     </div>
+                                    </Link>
                                 </div>
                                 </Col>
-                                <Col md={3}>
-                                <div className="cardParent">
-                                    <div className="card" onClick={redirectToAssignmentInfo}>
-                                        <div className="primaryText">
-                                            Assignment 1
-                                        </div>
-                                        <div className="secondaryText">
-                                            Create a responsive web page using Angular and SpringBoot.
-                                        </div>
-                                    </div>
-                                </div>
-                                </Col>
-                                <Col md={3}>
-                                <div className="cardParent">
-                                    <div className="card" onClick={redirectToAssignmentInfo}>
-                                        <div className="primaryText">
-                                            Assignment 1
-                                        </div>
-                                        <div className="secondaryText">
-                                            Create a responsive web page using Angular and SpringBoot.
-                                        </div>
-                                    </div>
-                                </div>
-                                </Col>
-                                <Col md={3}>
-                                <div className="cardParent">
-                                    <div className="card" onClick={redirectToAssignmentInfo}>
-                                        <div className="primaryText">
-                                            Assignment 1
-                                        </div>
-                                        <div className="secondaryText">
-                                            Create a responsive web page using Angular and SpringBoot.
-                                        </div>
-                                    </div>
-                                </div>
-                                </Col>
-                                <Col md={3}>
-                                <div className="cardParent">
-                                    <div className="card" onClick={redirectToAssignmentInfo}>
-                                        <div className="primaryText">
-                                            Assignment 1
-                                        </div>
-                                        <div className="secondaryText">
-                                            Create a responsive web page using Angular and SpringBoot.
-                                        </div>
-                                    </div>
-                                </div>
-                                </Col>
+                            )}
                             </Row>
                         </Container>
                     </div>

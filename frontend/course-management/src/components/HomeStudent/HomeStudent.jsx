@@ -12,6 +12,7 @@ import {
 function HomeStudent(){
     const defaultOnErrorFn = useRef(window.onerror);
     const [course,setCourse] = useState([]);
+    const userId = localStorage.getItem('userId');
     useEffect(() => {
     window.onerror = (...args) => {
         if (args[0] === 'ResizeObserver loop limit exceeded') {
@@ -30,7 +31,7 @@ function HomeStudent(){
         color: theme.palette.text.secondary,
     }));
     useEffect(() => {
-        fetch(`http://localhost:8080/students/courses`,{
+        fetch(`http://localhost:8080/students/list_of_teachers`,{
         method: 'GET',
 
         })
@@ -57,12 +58,18 @@ function HomeStudent(){
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             >
-                                <Typography>{course.course}</Typography>
+                                <Typography>{course.teacher_name}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Typography>
-                                    This course involves deep learning in {course.course}
-                                    <Link to={`/ViewAssignments/${course?.id}`}><span>View Here</span></Link>
+                                    <ul>
+                                    { course.courses.map((courseList) => 
+                                        Object.keys(courseList).map((key) => (
+                                            <Link to={`/AssignmentList/${key}`}><li key={key}>{courseList[key]}</li></Link>
+                                        ))
+                                    )}
+                                    </ul>
+                                    
                                 </Typography>
                             </AccordionDetails>
                          </Accordion>
