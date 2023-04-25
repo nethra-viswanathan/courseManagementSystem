@@ -14,10 +14,13 @@ import SignUpIns from './components/SignUpIns/SignUpIns.jsx'
 import InstructorDashboard from './components/InstructorDashboard/InstructorDashboard';
 import AddCourse from './components/AddCourse/AddCourse';
 import InstructorAssignments from './components/InstructorAssignments/InstructorAssignments';
+import AddAssignments from './components/AddAssignment/AddAssignment';
+import ViewStudentsInCourse from './components/ViewStudentsInCourse/ViewStudentsInCourse';
+import InstructorSingleAssignment from './components/InstructorSingleAssignment/InstructorSingleAssignment';
 import { BrowserRouter, Routes, Route, Navigate, } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate replace to="/SignIn" />} />
@@ -31,10 +34,13 @@ root.render(
           <Route path="/AssignmentList" element={< Assignments />} />
           <Route path="/Assignment" element={< SingleAssignment />} />
           <Route path="/AddCourse" element={< AddCourse />} />
-          <Route path="/ViewAssignments" element={< InstructorAssignments />} />
+          <Route path="/ViewAssignments/:id" element={< InstructorAssignments />} />
+          <Route path="/AddAssignments" element={< AddAssignments />} />
+          <Route path="/ViewStudentsInAssignment" element={< ViewStudentsInCourse />} />
+          <Route path="/ViewSubmission" element={< InstructorSingleAssignment />} />
         </Routes>
       </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

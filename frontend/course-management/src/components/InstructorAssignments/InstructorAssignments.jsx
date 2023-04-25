@@ -1,27 +1,34 @@
-import { useRef,useEffect } from "react"; 
-import Header from "../Header/Header"
-// import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-// import Masonry from '@mui/lab/Masonry';
+import {useEffect,useState } from "react"; 
 
+import InstructorHeader from "../InstructorHeader/InstructorHeader";
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 function InstructorAssignments(){
     const nav = useNavigate()
+    const { id } = useParams();
+    console.log("param",id)
+    const [assignmentList,setAssignmentList] = useState([]);
     const redirectToSubmittedStudents = () => { 
-        nav('/Assignment')
+        nav('/ViewStudentsInAssignment')
+    }
+    useEffect(() => {
+        fetch(`http://localhost:8080/teachers/courses/courseAssignments/${id}`,{
+        method: 'GET',
+
+        })
+        .then(response => response.json())
+        .then(data => {
+            setAssignmentList(data)
+            console.log(data)
+        });
+    },[])
+    const redirectToAddAss = () => { 
+        nav('/AddAssignments')
     }
 
 
@@ -35,7 +42,7 @@ function InstructorAssignments(){
     );
     return(
         <>
-            <Header></Header>
+            <InstructorHeader></InstructorHeader>
             <div className="AssignmentListingParentIns">
                 <div className="courseItemsSection">
                     <div className="header">
@@ -45,115 +52,27 @@ function InstructorAssignments(){
                         </div>
                         <div className="right">
                             <div className="button-input">
-                                <input type="button" name="" id="" className="submit-login" value="Add Assignment" />
+                                <input type="button" name="" id="" className="submit-login" value="Add Assignment" onClick={redirectToAddAss} />
                             </div>
                         </div>
                     </div>
-                    <div className="courseItems">
-                        {/* <Box >
-                            <Masonry columns={4} spacing={2}>
-                                {heights.map((height, index) => (
-                                <Item key={index} sx={{ height }} onClick={redirectToAssignmentInfo}>
-                                    <div className="assignmentName">Assignment {index+1}</div>
-                                    <div className="assignmentDesc">Create a responsive web page using Angular and SpringBoot.</div>
-                                </Item>
-                                ))}
-                            </Masonry>
-                        </Box> */}
-                        {/* <Card sx={{ minWidth: 275,maxWidth: '24%' }} onClick={redirectToAssignmentInfo}>
-                            <CardContent>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                    <div className="assignmentName">Assignment 1</div>
-                                    <div className="assignmentDesc">Create a responsive web page using Angular and SpringBoot.</div>
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                        <Card sx={{ minWidth: 275,maxWidth: '24%' }} onClick={redirectToAssignmentInfo}>
-                            <CardContent>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                    <div className="assignmentName">Assignment 1</div>
-                                    <div className="assignmentDesc">Create a responsive web page using Angular and SpringBoot.</div>
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                        <Card sx={{ minWidth: 275,maxWidth: '24%' }} onClick={redirectToAssignmentInfo}>
-                            <CardContent>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                    <div className="assignmentName">Assignment 1</div>
-                                    <div className="assignmentDesc">Create a responsive web page using Angular and SpringBoot.</div>
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                        <Card sx={{ minWidth: 275,maxWidth: '24%' }} onClick={redirectToAssignmentInfo}>
-                            <CardContent>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                    <div className="assignmentName">Assignment 1</div>
-                                    <div className="assignmentDesc">Create a responsive web page using Angular and SpringBoot.</div>
-                                </Typography>
-                            </CardContent>
-                        </Card> */}
+                    <div className="courseItems">    
                         <Container>
                             <Row>
-                                <Col md={3}>
-                                <div className="cardParent">
-                                    <div className="card" onClick={redirectToSubmittedStudents}>
-                                        <div className="primaryText">
-                                            Assignment 1
+                                {   assignmentList.map((assignmentList) => 
+                                        <Col md={3}>
+                                        <div className="cardParent">
+                                            <div className="card" onClick={redirectToSubmittedStudents}>
+                                                <div className="primaryText">
+                                                    {assignmentList.name}
+                                                </div>
+                                                <div className="secondaryText">
+                                                    {assignmentList.description}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="secondaryText">
-                                            Create a responsive web page using Angular and SpringBoot.
-                                        </div>
-                                    </div>
-                                </div>
-                                </Col>
-                                <Col md={3}>
-                                <div className="cardParent">
-                                    <div className="card" onClick={redirectToSubmittedStudents}>
-                                        <div className="primaryText">
-                                            Assignment 1
-                                        </div>
-                                        <div className="secondaryText">
-                                            Create a responsive web page using Angular and SpringBoot.
-                                        </div>
-                                    </div>
-                                </div>
-                                </Col>
-                                <Col md={3}>
-                                <div className="cardParent">
-                                    <div className="card" onClick={redirectToSubmittedStudents}>
-                                        <div className="primaryText">
-                                            Assignment 1
-                                        </div>
-                                        <div className="secondaryText">
-                                            Create a responsive web page using Angular and SpringBoot.
-                                        </div>
-                                    </div>
-                                </div>
-                                </Col>
-                                <Col md={3}>
-                                <div className="cardParent">
-                                    <div className="card" onClick={redirectToSubmittedStudents}>
-                                        <div className="primaryText">
-                                            Assignment 1
-                                        </div>
-                                        <div className="secondaryText">
-                                            Create a responsive web page using Angular and SpringBoot.
-                                        </div>
-                                    </div>
-                                </div>
-                                </Col>
-                                <Col md={3}>
-                                <div className="cardParent">
-                                    <div className="card" onClick={redirectToSubmittedStudents}>
-                                        <div className="primaryText">
-                                            Assignment 1
-                                        </div>
-                                        <div className="secondaryText">
-                                            Create a responsive web page using Angular and SpringBoot.
-                                        </div>
-                                    </div>
-                                </div>
-                                </Col>
+                                        </Col>
+                                )}
                             </Row>
                         </Container>
                     </div>

@@ -21,6 +21,16 @@
             margin-bottom: 15px;
         }
     }
+    .courseItems{
+        .MuiTypography-root{
+            span{
+                text-decoration: underline;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+        }
+
+    }
     .css-ahj2mt-MuiTypography-root{
         font-family: inherit;
     }
